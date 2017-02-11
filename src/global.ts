@@ -7,9 +7,7 @@ import * as path from 'path';
 import * as requirements from './features/requirements'
 import { Delayer } from './features/delayer';
 
-
-
-let DEBUG: boolean = true;
+let DEBUG: boolean = false;
 
 interface SpellSettingsIgnore {
     ignoreWordsList: string[];
