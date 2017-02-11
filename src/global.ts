@@ -7,9 +7,7 @@ import * as path from 'path';
 import * as requirements from './features/requirements'
 import { Delayer } from './features/delayer';
 
-
-
-let DEBUG: boolean = true;
+let DEBUG: boolean = false;
 
 interface SpellSettingsIgnore {
     ignoreWordsList: string[];
@@ -164,12 +162,12 @@ export class Global{
     }
 
     public TriggerDiffDiagnostics(event: vscode.TextDocumentChangeEvent) {
-        //return;
         let document = event.document;
-        //console.log("event chahge =========");
         let d = this.validationDelayer[document.uri.toString()];
 
-        if (!d) {
+        return;
+        
+        /*if (!d) {
             d = new Delayer<any>(1000);
             this.validationDelayer[document.uri.toString()] = d;
         }
@@ -180,7 +178,7 @@ export class Global{
                 this.CreateDiagnosticsForText(document, textLine.text, i.range.end.line);
                 delete this.validationDelayer[document.uri.toString()];
             });
-        }
+        }*/
     }
 
     private changeLanguage(){
@@ -351,7 +349,7 @@ export class Global{
         let problems = [];
         // removeUnwantedText before processing the spell checker ignores a lot of chars so removing them aids in problem matching
         let docToCheck = this.removeUnwantedText(text);
-        docToCheck = docToCheck.replace(/[\"!#$%&()*+,.\/:;<=>?@\[\]\\^_{|}]/g, " ");
+        docToCheck = docToCheck.replace(/[\'`\"!#$%&()*+,.\/:;<=>?@\[\]\\^_{|}]/g, " ");
 
         problems = await this.hunSpell.check(this.settings.language, docToCheck, true, lineStart);
         for (let x = 0; x < problems.length; x++) {
@@ -361,19 +359,19 @@ export class Global{
                     let lineRange = new vscode.Range(problem.startLine, problem.startChar, problem.endLine, problem.endChar);
                     let loc = new vscode.Location(document.uri, lineRange);
 
-                    let diag = new vscode.Diagnostic(lineRange, problem.message, vscode.DiagnosticSeverity.Error);
+                    let diag = new vscode.Diagnostic(lineRange, problem.message, vscode.DiagnosticSeverity.Warning);
                     diagnostics.push(diag);
             }
         }
         
-        if (lineStart > 0){
+        /*if (lineStart > 0){
             let olddiagnostics = this.diagnosticMap[document.uri.toString()];
             if (olddiagnostics){
                 olddiagnostics.forEach(diagnostic => {
                     diagnostics.push(diagnostic);
                 });
             }
-        }
+        }*/
         this.spellDiagnostics.set(document.uri, diagnostics);
         this.diagnosticMap[document.uri.toString()] = diagnostics;
         

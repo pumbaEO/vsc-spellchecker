@@ -2,11 +2,15 @@
     "name": "vsc-spellchecker",
     "displayName": "spellchecker",
     "description": "",
-    "version": "0.1.2",
+    "version": "0.1.4",
     "publisher": "pumbaEO",
     "license": "MIT",
     "engines": {
         "vscode": "^1.5.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pumbaEO/vsc-spellchecker.git"
     },
     "categories": [
         "Other",

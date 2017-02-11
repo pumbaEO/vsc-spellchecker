@@ -219,7 +219,7 @@ export class HunSpeller{
 
         textoriginal = textoriginal.replace( /\r?\n/g, '\n' );
         let text: string = textoriginal;
-        text = text.replace( /[`\"!#$%&()*+,.\/:;<=>?@\[\]\\^_{|}\n\r\-~]/g, ' ' );
+        text = text.replace( /[`\'\"!#$%&()*+,.\/:;<=>?@\[\]\\^_{|}\n\r\-~]/g, ' ' );
         let lines = textoriginal.split( '\n' );
 
         let lastposition = 0;
@@ -244,6 +244,9 @@ export class HunSpeller{
                 for (var x = 0; x < words.length; x++) {
                     let word = words[x];
                     if (word == undefined || word.length < 4) {
+                        continue;
+                    }
+                    if (word.match(/\d+/)){
                         continue;
                     }
                     let result = await this.checkWord(word, languageSorted);
