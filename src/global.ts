@@ -162,12 +162,12 @@ export class Global{
     }
 
     public TriggerDiffDiagnostics(event: vscode.TextDocumentChangeEvent) {
-        //return;
         let document = event.document;
-        //console.log("event chahge =========");
         let d = this.validationDelayer[document.uri.toString()];
 
-        if (!d) {
+        return;
+        
+        /*if (!d) {
             d = new Delayer<any>(1000);
             this.validationDelayer[document.uri.toString()] = d;
         }
@@ -178,7 +178,7 @@ export class Global{
                 this.CreateDiagnosticsForText(document, textLine.text, i.range.end.line);
                 delete this.validationDelayer[document.uri.toString()];
             });
-        }
+        }*/
     }
 
     private changeLanguage(){
@@ -364,14 +364,14 @@ export class Global{
             }
         }
         
-        if (lineStart > 0){
+        /*if (lineStart > 0){
             let olddiagnostics = this.diagnosticMap[document.uri.toString()];
             if (olddiagnostics){
                 olddiagnostics.forEach(diagnostic => {
                     diagnostics.push(diagnostic);
                 });
             }
-        }
+        }*/
         this.spellDiagnostics.set(document.uri, diagnostics);
         this.diagnosticMap[document.uri.toString()] = diagnostics;
         
