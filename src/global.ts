@@ -349,7 +349,7 @@ export class Global{
         let problems = [];
         // removeUnwantedText before processing the spell checker ignores a lot of chars so removing them aids in problem matching
         let docToCheck = this.removeUnwantedText(text);
-        docToCheck = docToCheck.replace(/[\"!#$%&()*+,.\/:;<=>?@\[\]\\^_{|}]/g, " ");
+        docToCheck = docToCheck.replace(/[\'`\"!#$%&()*+,.\/:;<=>?@\[\]\\^_{|}]/g, " ");
 
         problems = await this.hunSpell.check(this.settings.language, docToCheck, true, lineStart);
         for (let x = 0; x < problems.length; x++) {
@@ -359,7 +359,7 @@ export class Global{
                     let lineRange = new vscode.Range(problem.startLine, problem.startChar, problem.endLine, problem.endChar);
                     let loc = new vscode.Location(document.uri, lineRange);
 
-                    let diag = new vscode.Diagnostic(lineRange, problem.message, vscode.DiagnosticSeverity.Error);
+                    let diag = new vscode.Diagnostic(lineRange, problem.message, vscode.DiagnosticSeverity.Warning);
                     diagnostics.push(diag);
             }
         }

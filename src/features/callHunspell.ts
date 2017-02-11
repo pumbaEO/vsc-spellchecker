@@ -246,6 +246,9 @@ export class HunSpeller{
                     if (word == undefined || word.length < 4) {
                         continue;
                     }
+                    if (word.match(/\d+/)){
+                        continue;
+                    }
                     let result = await this.checkWord(word, languageSorted);
                     if (!result["check"]){
                         lastposition = 0;
