@@ -1,6 +1,11 @@
 import * as assert from 'assert';
 import * as vscode from 'vscode';
 import * as spellchecker from '../src/extension';
+import * as path from "path";
+import { addText, fixturePath, mAsync, newTextDocument } from "./helpers";
+import { Global } from '../src/global'; 
+
+let textDocument: vscode.TextDocument;
 
 suite('SpellChecker Language Extension', () => {
 
@@ -27,43 +32,19 @@ suite('SpellChecker Language Extension', () => {
 		});
 	});
 
-	/*test('should register all java commands', function (done) {
-		return vscode.commands.getCommands(true).then((commands) =>
-		{
-			let javaCmds = commands.filter(function(value){
-				return 'java.open.output' === value ||
-						'java.show.references' === value;
-			});
-			assert.ok(javaCmds.length === 2, 'missing java commands');
-			done();
-		});
-	});
+	test('should spell document', mAsync(async (done) => {
+        const uriFile = vscode.Uri.file(
+            path.join(fixturePath, "empty.txt")
+        );
+        textDocument = await newTextDocument(uriFile);
+		await addText("swiming\n");
+		await addText("swimming");
+		
+		const position = new vscode.Position(1, 3);
+        const errors = await vscode.commands.executeCommand<vscode.DiagnosticCollection[]>(
+				Global.spellCurrentTextDocumentCmdId);
 
-	test('should parse VM arguments', function (done) {
-		let userArgs = '-Xmx512m -noverify   -Dfoo=\"something with blank\"  ';
-		let vmArgs = ['-noverify', 'foo'];
-
-		java.parseVMargs(vmArgs, userArgs);
-
-		assert.equal(4, vmArgs.length);
-		assert.equal('-noverify', vmArgs[0]);
-		assert.equal('foo', vmArgs[1]);
-		assert.equal('-Xmx512m', vmArgs[2]);
-		assert.equal('-Dfoo=something with blank', vmArgs[3]);
-
-		done();
-	});
-
-	test('should parse VM arguments with spaces', function (done) {
-		let userArgs = '-javaagent:"C:\\Program Files\\Java\\lombok.jar" -Xbootclasspath/a:"C:\\Program Files\\Java\\lombok.jar" -Dfoo="Some \\"crazy\\" stuff"';
-		let vmArgs = [];
-
-		java.parseVMargs(vmArgs, userArgs);
-
-		assert.equal(vmArgs.length, 3);
-		assert.equal(vmArgs[0], '-javaagent:C:\\Program Files\\Java\\lombok.jar');
-		assert.equal(vmArgs[1], '-Xbootclasspath/a:C:\\Program Files\\Java\\lombok.jar');
-		assert.equal(vmArgs[2], '-Dfoo=Some "crazy" stuff');
-		done();
-	});*/
+		assert.ok(errors.length > 0, 'missing errors for swiming');
+       
+	}));
 });

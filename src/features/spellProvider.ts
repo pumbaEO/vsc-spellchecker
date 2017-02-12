@@ -31,6 +31,9 @@ export class SpellProvider extends AbstractProvider implements vscode.CodeAction
 
     public provideCodeActions(document: vscode.TextDocument, range: vscode.Range, context: vscode.CodeActionContext, token: vscode.CancellationToken): vscode.Command[] {
 
+        if (context.diagnostics.length < 1) {
+            return;
+        }
         let diagnostic: vscode.Diagnostic = context.diagnostics[0];
 
         let match: string[] = diagnostic.message.match(/\[([a-zа-яёієїґ0-9\ ]+)\]\ \-/i);
@@ -58,7 +61,7 @@ export class SpellProvider extends AbstractProvider implements vscode.CodeAction
             suggestions = suggestionstring.split(/\,\ /g);
         }
         if (suggestions.length < 1){
-            suggestions = this._global.hunSpell.getSuggestions(error, this._global.settings.language);
+            //suggestions = this._global.hunSpell.getSuggestions(error, this._global.settings.language);
         }
         // Add suggestions to command list
         suggestions.forEach(function (suggestion) {
@@ -76,7 +79,7 @@ export class SpellProvider extends AbstractProvider implements vscode.CodeAction
         });
         let currTime = new Date().getTime();
         let seconds: number = Math.floor( ( currTime - startTime ) / 1000 );
-        console.log("loaded " + " time:"+seconds);
+        //console.log("loaded " + " time:"+seconds);
 
         return commands;
     }

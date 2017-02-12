@@ -165,9 +165,9 @@ export class Global{
         let document = event.document;
         let d = this.validationDelayer[document.uri.toString()];
 
-        return;
+        //return;
         
-        /*if (!d) {
+        if (!d) {
             d = new Delayer<any>(1000);
             this.validationDelayer[document.uri.toString()] = d;
         }
@@ -178,7 +178,7 @@ export class Global{
                 this.CreateDiagnosticsForText(document, textLine.text, i.range.end.line);
                 delete this.validationDelayer[document.uri.toString()];
             });
-        }*/
+        }
     }
 
     private changeLanguage(){
@@ -203,7 +203,7 @@ export class Global{
     private async TriggerActiveTextEditorDiagnostics(){
         if (vscode.window.activeTextEditor) {
             //await this.resolveRequirements();
-            this.CreateDiagnostics(vscode.window.activeTextEditor.document);
+            return this.CreateDiagnostics(vscode.window.activeTextEditor.document);
         }
     }
 
@@ -341,7 +341,7 @@ export class Global{
 
         if (DEBUG) console.log("Starting new check on: " + document.fileName + " [" + document.languageId + "]");
         //});
-        this.CreateDiagnosticsForText(document, docToCheck);
+        return this.CreateDiagnosticsForText(document, docToCheck);
     }
 
     public async CreateDiagnosticsForText(document: vscode.TextDocument, text: string, lineStart: number = 0) {
@@ -364,17 +364,19 @@ export class Global{
             }
         }
         
-        /*if (lineStart > 0){
+        if (lineStart > 0){
             let olddiagnostics = this.diagnosticMap[document.uri.toString()];
             if (olddiagnostics){
                 olddiagnostics.forEach(diagnostic => {
                     diagnostics.push(diagnostic);
                 });
             }
-        }*/
-        this.spellDiagnostics.set(document.uri, diagnostics);
-        this.diagnosticMap[document.uri.toString()] = diagnostics;
-        
+            this.spellDiagnostics.set(document.uri, diagnostics);
+        } else {
+            this.spellDiagnostics.set(document.uri, diagnostics);
+            this.diagnosticMap[document.uri.toString()] = diagnostics;
+        }
+        return diagnostics;
     }
 
     public async resolveRequirements() {

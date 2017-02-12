@@ -139,7 +139,7 @@ export class HunSpeller{
     public getSuggestions(word: string, language: string[]){
         let suggestions: string[] = new Array();
         let checkedWord = this.checkedWords[word.toLowerCase()];
-        if (checkedWord["suggest"].length > 0) {
+        if (checkedWord && checkedWord["suggest"].length > 0) {
             return checkedWord["suggest"];
         }
         
@@ -156,9 +156,14 @@ export class HunSpeller{
                     suggestions.push(suggest[x]);
                 }
             }
+            if (suggestions.length > 0){
+                break;
+            }
         }
-        checkedWord["suggest"] = suggestions;
-        this.checkedWords[word.toLowerCase()] = checkedWord;
+        if (checkedWord) {
+            checkedWord["suggest"] = suggestions;
+            this.checkedWords[word.toLowerCase()] = checkedWord;
+        }
         return suggestions;
     }
 
@@ -187,6 +192,7 @@ export class HunSpeller{
             
             if (!sc.check(word)){
                 result["check"] = false;
+                //console.error(element + "word "+word);
                 if (word.length < 50 && addsuggest) {
                     let suggest: string[] = sc.suggest( word );
                     for (let index of suggest){
@@ -195,10 +201,12 @@ export class HunSpeller{
                     //result["suggest"] = sc.suggest( word );
                 }
             } else {
-                this.addStatistic(language);
+                this.addStatistic(element);
+                //console.log(element + "word "+word);
                 index = language.length;
                 result["check"] = true;
                 result["suggest"] = [];
+                break;
             }
         }
         
@@ -253,7 +261,7 @@ export class HunSpeller{
                     if (!result["check"]){
                         lastposition = 0;
                         position = line.indexOf(word, lastposition);
-                        while(position > 0) {
+                        while(position > -1) {
                             problems.push({
                                 error: word,
                                 preContext: token,
