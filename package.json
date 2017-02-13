@@ -1,16 +1,16 @@
 {
-    "name": "vsc-spellchecker",
-    "displayName": "spellchecker",
-    "description": "",
-    "version": "0.1.5",
-    "publisher": "pumbaEO",
-    "license": "MIT",
+    "name": "title-case-spellchecker",
+    "displayName": "TitleCase SpellChecker",
+    "description": "TitleCase off-line spellchecker ",
+    "version": "0.1.7",
+    "publisher": "silverbulleters",
+    "license": "SEE LICENSE IN LICENSE.md",
     "engines": {
         "vscode": "^1.9.0"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/pumbaEO/vsc-spellchecker.git"
+        "url": "https://github.com/silverbulleters/vsc-spellchecker.git"
     },
     "categories": [
         "Other",
@@ -18,21 +18,21 @@
     ],
     "activationEvents": [
         "*",
-        "onLanguage:*",
-        "onCommand:extension.sayHello"
+        "onCommand:vsc-spellchecker.currentSpell",
+        "onCommand:vsc-spellchecker.languageChange"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "commands": [
             {
-                "command": "vsc-spellchecker.spellCurrent",
-                "title": "Spell current active text editor",
-                "category": "spellchecker"
+                "command": "vsc-spellchecker.currentSpell",
+                "title": "Check the spelling of the current file",
+                "category": "TitleCase SpellChecker"
             },
             {
-                "command": "vsc-spellchecker.changeLanguage",
-                "title": "Change Language",
-                "category": "spellchecker"
+                "command": "vsc-spellchecker.languageChange",
+                "title": "Change language of spelling",
+                "category": "TitleCase SpellChecker"
             }
         ],
         "keybindings":[
@@ -42,7 +42,7 @@
             }
         ],
         "configuration": {
-            "title": "Spellchecker configuration",
+            "title": "TitleCase Spellchecker configuration",
             "properties": {
                 "vsc-spellchecker.dictionariesUrl":{
                     "description": "Url to download dictionaries",
@@ -75,16 +75,16 @@
     },
     "devDependencies": {
         "typescript": "^2.1.6",
-        "vscode": "^1.0.0",
-        "mocha": "^2.3.3",
-        "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
+        "vscode": "^1.0.3",
+        "mocha": "^3.2.0",
+        "@types/node": "^7.0.5",
+        "@types/mocha": "^2.2.39"
     },
     "dependencies": {
         "hunspell-spellchecker": "^1.0.2",
         "http-proxy-agent": "^1.0.0",
         "https-proxy-agent": "^1.0.0",
-        "tmp" : "^0.0.29",
+        "tmp" : "^0.0.31",
         "decompress": "^4.0.0",
         "progress-stream": "^1.2.0",
         "path-exists":"^3.0.0",

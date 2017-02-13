@@ -1,11 +1,10 @@
-# vsc-spellchecker README
+# TitleCase SpellChecker
 
-Еще одна проверка орфографии, только не on-line , а с включенными в себя некоторыми словарями.
+Еще одна проверка орфографии, только не on-line, а с включенными в себя некоторыми словарями.
 
 ## Features
 
 Подключает словари из проекта libreoffice, дополнительно перекодированных в utf-8 из репозитария https://github.com/wooorm/dictionaries/
-
 
 ## Requirements
 
@@ -13,7 +12,4 @@
 
 ## Extension Settings
 
-## Release Notes
-
-Альфа версия. 
-
+> TODO

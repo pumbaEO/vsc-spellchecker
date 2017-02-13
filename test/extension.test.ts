@@ -10,12 +10,12 @@ let textDocument: vscode.TextDocument;
 suite('SpellChecker Language Extension', () => {
 
 	test('should be present', () => {
-		assert.ok(vscode.extensions.getExtension('pumbaEO.vsc-spellchecker'));
+		assert.ok(vscode.extensions.getExtension('silverbulleters.vsc-spellchecker'));
 	});
 
 	test('should activate', function (done) {
 		this.timeout(1 * 60 * 1000);
-		return vscode.extensions.getExtension('pumbaEO.vsc-spellchecker').activate().then((api) => {
+		return vscode.extensions.getExtension('silverbulleters.vsc-spellchecker').activate().then((api) => {
 			done();
 		});
 	});
@@ -24,8 +24,8 @@ suite('SpellChecker Language Extension', () => {
 		return vscode.commands.getCommands(true).then((commands) => 
 		{
 			let spellCmds = commands.filter(function (value) {
-				return 'vsc-spellchecker.changeLanguage' === value ||
-						'vsc-spellchecker.spellCurrent' === value;
+				return Global.changeLanguageCmdId === value ||
+						Global.spellCurrentTextDocumentCmdId === value;
 			});
 			assert.ok(spellCmds.length === 2, 'missing spell commands');
 			done();
