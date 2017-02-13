@@ -1,7 +1,7 @@
 {
-    "name": "vsc-spellchecker",
-    "displayName": "CamelCaseSpellchecker",
-    "description": "CamelCase off-line spellchecker ",
+    "name": "title-case-spellchecker",
+    "displayName": "TitleCase SpellChecker",
+    "description": "TitleCase off-line spellchecker ",
     "version": "0.1.6",
     "publisher": "silverbulleters",
     "license": "SEE LICENSE IN LICENSE.md",
@@ -26,13 +26,13 @@
         "commands": [
             {
                 "command": "vsc-spellchecker.currentSpell",
-                "title": "Current text spell",
-                "category": "spellchecker"
+                "title": "Check the spelling of the current file",
+                "category": "TitleCase SpellChecker"
             },
             {
                 "command": "vsc-spellchecker.languageChange",
-                "title": "Language change to spell",
-                "category": "spellchecker"
+                "title": "Change language of spelling",
+                "category": "TitleCase SpellChecker"
             }
         ],
         "keybindings":[
@@ -42,7 +42,7 @@
             }
         ],
         "configuration": {
-            "title": "Spellchecker configuration",
+            "title": "TitleCase Spellchecker configuration",
             "properties": {
                 "vsc-spellchecker.dictionariesUrl":{
                     "description": "Url to download dictionaries",
