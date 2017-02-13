@@ -38,8 +38,8 @@ export class Global{
     
     public static addToDictionaryCmdId: string = 'vsc-spellchecker.addToDictionary';
     public static fixOnSuggestionCmdId: string = 'vsc-spellchecker.fixOnSuggestion';
-    public static changeLanguageCmdId: string = 'vsc-spellchecker.changeLanguage';
-    public static spellCurrentTextDocumentCmdId: string = 'vsc-spellchecker.spellCurrent';
+    public static changeLanguageCmdId: string = 'vsc-spellchecker.languageChange';
+    public static spellCurrentTextDocumentCmdId: string = 'vsc-spellchecker.currentSpell';
 
 
     private problems: SpellProblem[] = [];
@@ -76,7 +76,7 @@ export class Global{
         let dictionariesRootPath = config.get<string>('vsc-spellchecker.dictionariesRootPath',null); 
     
 
-        vscode.commands.registerCommand("toggleSpell", this.toggleSpell.bind(this));
+        vscode.commands.registerCommand("vsc-spellchecker.toggleSpell", this.toggleSpell.bind(this));
         this.statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left);
         this.statusBarItem.command = "toggleSpell";
         this.statusBarItem.tooltip = "Toggle Spell Checker On/Off for supported files";

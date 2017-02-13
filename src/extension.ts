@@ -9,7 +9,7 @@ import { SpellProvider } from './features/spellProvider'
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-    console.log('Congratulations, your extension "vsc-spellchecker" is now active!');
+    //console.log('Congratulations, your extension "vsc-spellchecker" is now active!');
     const global = new Global();
     global.activate(context);
 
