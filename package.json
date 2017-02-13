@@ -75,16 +75,16 @@
     },
     "devDependencies": {
         "typescript": "^2.1.6",
-        "vscode": "^1.0.0",
-        "mocha": "^2.3.3",
-        "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
+        "vscode": "^1.0.3",
+        "mocha": "^3.2.0",
+        "@types/node": "^7.0.5",
+        "@types/mocha": "^2.2.39"
     },
     "dependencies": {
         "hunspell-spellchecker": "^1.0.2",
         "http-proxy-agent": "^1.0.0",
         "https-proxy-agent": "^1.0.0",
-        "tmp" : "^0.0.29",
+        "tmp" : "^0.0.31",
         "decompress": "^4.0.0",
         "progress-stream": "^1.2.0",
         "path-exists":"^3.0.0",
