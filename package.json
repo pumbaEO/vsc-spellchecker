@@ -2,7 +2,7 @@
     "name": "title-case-spellchecker",
     "displayName": "TitleCase SpellChecker",
     "description": "TitleCase off-line spellchecker ",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "publisher": "silverbulleters",
     "license": "SEE LICENSE IN LICENSE.md",
     "engines": {
