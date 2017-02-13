@@ -3,7 +3,7 @@
     "displayName": "TitleCase SpellChecker",
     "description": "TitleCase off-line spellchecker",
     "icon": "icon.png",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "publisher": "silverbulleters",
     "license": "SEE LICENSE IN LICENSE.md",
     "engines": {
