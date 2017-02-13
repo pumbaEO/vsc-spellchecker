@@ -1,7 +1,8 @@
 {
     "name": "title-case-spellchecker",
     "displayName": "TitleCase SpellChecker",
-    "description": "TitleCase off-line spellchecker ",
+    "description": "TitleCase off-line spellchecker",
+    "icon": "icon.png",
     "version": "0.1.7",
     "publisher": "silverbulleters",
     "license": "SEE LICENSE IN LICENSE.md",
