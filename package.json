@@ -4,7 +4,7 @@
     "description": "CamelCase off-line spellchecker ",
     "version": "0.1.6",
     "publisher": "silverbulleters",
-    "license": "MIT",
+    "license": "SEE LICENSE IN LICENSE.md",
     "engines": {
         "vscode": "^1.9.0"
     },
@@ -19,7 +19,7 @@
     "activationEvents": [
         "*",
         "onCommand:vsc-spellchecker.currentSpell",
-        "vsc-spellchecker.languageChange"
+        "onCommand:vsc-spellchecker.languageChange"
     ],
     "main": "./out/src/extension",
     "contributes": {
