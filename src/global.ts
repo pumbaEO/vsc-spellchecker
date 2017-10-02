@@ -78,7 +78,7 @@ export class Global{
 
         vscode.commands.registerCommand("vsc-spellchecker.toggleSpell", this.toggleSpell.bind(this));
         this.statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left);
-        this.statusBarItem.command = "toggleSpell";
+        this.statusBarItem.command = "vsc-spellchecker.toggleSpell";
         this.statusBarItem.tooltip = "Toggle Spell Checker On/Off for supported files";
         this.statusBarItem.show();
 
@@ -141,21 +141,23 @@ export class Global{
             this.statusBarItem.text = `$(book) Spell Enabled [${this.settings.language}]`;
             this.statusBarItem.color = "white";
         }
+        this.statusBarItem.show();
     }
 
     public async TriggerDiagnostics(document: vscode.TextDocument){
+        if (document.uri.scheme !== "file") {return};
         // Do nothing if the doc type is not one we should test
         if (this.settings.languageIDs.indexOf(document.languageId) === -1) {
-            // if(DEBUG) console.log("Hiding status due to language ID [" + document.languageId + "]");
-            this.statusBarItem.hide();
             return;
         } else {
             this.updateStatus();
-            // statusBarItem.show();
+            this.statusBarItem.show();
         }
 
-        if (this.IsDisabled) return;
-        //await this.resolveRequirements();
+        if (this.IsDisabled) {
+            this.spellDiagnostics.delete(document.uri);
+            return;
+        }
 
         this.CreateDiagnostics(document);
 
@@ -202,7 +204,6 @@ export class Global{
 
     private async TriggerActiveTextEditorDiagnostics(){
         if (vscode.window.activeTextEditor) {
-            //await this.resolveRequirements();
             return this.CreateDiagnostics(vscode.window.activeTextEditor.document);
         }
     }
@@ -264,7 +265,6 @@ export class Global{
         this.changeLanguageCmd.dispose();
     }
 
-
     private addToDictionary(document: vscode.TextDocument, word: string): any {
         if (DEBUG) console.log("Attempting to add to dictionary: " + word)
 
@@ -274,7 +274,11 @@ export class Global{
             this.settingsIgnore.ignoreWordsList.push(word);
             this.writeSettings();
         }
-        //this.TriggerDiagnostics(document);
+        const event: vscode.TextDocumentChangeEvent = {
+            document: document,
+            contentChanges: []
+        }
+        this.TriggerDiffDiagnostics(event);
     }
 
     private fixOnSuggestion(document: vscode.TextDocument, diagnostic: vscode.Diagnostic, error: string, suggestion: string): any {
@@ -345,6 +349,7 @@ export class Global{
     }
 
     public async CreateDiagnosticsForText(document: vscode.TextDocument, text: string, lineStart: number = 0) {
+        
         let diagnostics: vscode.Diagnostic[] = [];
         let problems = [];
         // removeUnwantedText before processing the spell checker ignores a lot of chars so removing them aids in problem matching
@@ -363,7 +368,6 @@ export class Global{
                     diagnostics.push(diag);
             }
         }
-        
         if (lineStart > 0){
             let olddiagnostics = this.diagnosticMap[document.uri.toString()];
             if (olddiagnostics){
@@ -393,7 +397,5 @@ export class Global{
 
         })
     }
-
-
 
 }

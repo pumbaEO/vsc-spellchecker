@@ -60,9 +60,14 @@ export class SpellProvider extends AbstractProvider implements vscode.CodeAction
 
             suggestions = suggestionstring.split(/\,\ /g);
         }
-        if (suggestions.length < 1){
-            //suggestions = this._global.hunSpell.getSuggestions(error, this._global.settings.language);
-        }
+        /*if (suggestions.length < 1){
+            commands.push({
+                title: 'Found suggestion ...',
+                command: Global.foundOnSuggestionCmdId,
+                arguments: [document, error]
+            })
+
+        }*/
         // Add suggestions to command list
         suggestions.forEach(function (suggestion) {
             commands.push({
