@@ -36,7 +36,7 @@
                 "category": "TitleCase SpellChecker"
             }
         ],
-        "keybindings":[
+        "keybindings": [
             {
                 "command": "editor.action.quickFix",
                 "key": "Alt+."
@@ -45,25 +45,33 @@
         "configuration": {
             "title": "TitleCase Spellchecker configuration",
             "properties": {
-                "vsc-spellchecker.dictionariesUrl":{
+                "vsc-spellchecker.dictionariesUrl": {
                     "description": "Url to download dictionaries",
-                    "type":"string",
+                    "type": "string",
                     "default": "https://github.com/wooorm/dictionaries/archive/master.zip"
                 },
-                "vsc-spellchecker.dictionariesRootPath":{
+                "vsc-spellchecker.dictionariesRootPath": {
                     "description": "Path to local dictionaries to decompres, default extesinons path",
-                    "type":"string",
-                    "default":""
+                    "type": "string",
+                    "default": ""
                 },
-                "vsc-spellchecker.language":{
+                "vsc-spellchecker.language": {
                     "description": "language arrays",
                     "type": "array",
-                    "default": ["uk_UA", "ru_RU", "en_US"]
+                    "default": [
+                        "uk_UA",
+                        "ru_RU",
+                        "en_US"
+                    ]
                 },
-                "vsc-spellchecker.languageIDs":{
+                "vsc-spellchecker.languageIDs": {
                     "description": "language id",
-                    "type":"array",
-                    "default":["markdown","plaintext","feature"]
+                    "type": "array",
+                    "default": [
+                        "markdown",
+                        "plaintext",
+                        "feature"
+                    ]
                 }
             }
         }
@@ -85,11 +93,11 @@
         "hunspell-spellchecker": "^1.0.2",
         "http-proxy-agent": "^1.0.0",
         "https-proxy-agent": "^1.0.0",
-        "tmp" : "^0.0.31",
+        "tmp": "^0.0.31",
         "decompress": "^4.0.0",
         "progress-stream": "^1.2.0",
-        "path-exists":"^3.0.0",
-        "expand-home-dir":"^0.0.3",
-        "glob":"^7.1.1"
+        "path-exists": "^3.0.0",
+        "expand-home-dir": "^0.0.3",
+        "glob": "^7.1.1"
     }
 }
