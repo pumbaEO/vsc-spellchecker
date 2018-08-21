@@ -82,8 +82,8 @@
     },
     "dependencies": {
         "hunspell-spellchecker": "^1.0.2",
-        "http-proxy-agent": "^1.0.0",
-        "https-proxy-agent": "^1.0.0",
+        "http-proxy-agent": "~> 2.2.0",
+        "https-proxy-agent": "~> 2.2.0",
         "tmp" : "^0.0.29",
         "decompress": "^4.0.0",
         "progress-stream": "^1.2.0",
